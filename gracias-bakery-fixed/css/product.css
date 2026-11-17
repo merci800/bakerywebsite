@@ -1,0 +1,155 @@
+/* ==========================================================
+   product.css  (only product.html)
+   Product details page: photos on one side, text on the other.
+   ========================================================== */
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 24px;
+  font-weight: 700;
+}
+
+.back-link:hover {
+  color: var(--berry);
+}
+
+/* Two columns: photos | text */
+.product-page {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/* Big photo */
+.main-photo {
+  aspect-ratio: 1 / 1;
+  border: 2px solid var(--crust);
+  border-radius: 16px;
+  background: #f6d98c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 7rem;
+  overflow: hidden;
+}
+
+.main-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Small photos under the big one */
+.thumbs {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.thumb {
+  width: 80px;
+  height: 80px;
+  padding: 0;
+  border: 2px solid var(--crust);
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #f6d98c;
+}
+
+.thumb:hover {
+  border-color: var(--berry);
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Text side */
+.product-text h1 {
+  font-family: var(--font-title);
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.1;
+  margin: 4px 0 10px;
+}
+
+.category {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--berry);
+}
+
+.big-price {
+  font-size: 1.5rem;
+  margin: 0 0 16px;
+}
+
+.product-text h3 {
+  font-family: var(--font-title);
+  margin: 22px 0 8px;
+}
+
+.detail-list {
+  margin: 0 0 26px 20px;
+}
+
+.detail-list li {
+  margin-bottom: 4px;
+}
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+@media (max-width: 760px) {
+  .product-page {
+    grid-template-columns: 1fr; /* photos above text */
+    gap: 24px;
+  }
+
+  .main-photo {
+    max-width: 480px;
+  }
+}
+
+@media (max-width: 480px) {
+  .thumb {
+    width: 64px;
+    height: 64px;
+  }
+
+  .product-text .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ==========================================================
+   ADD TO CART AREA (quantity + buttons)
+   ========================================================== */
+
+.qty-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+
+.product-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+@media (max-width: 480px) {
+  .product-actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+}

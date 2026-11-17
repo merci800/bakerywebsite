@@ -1,0 +1,39 @@
+/* ==========================================================
+   menu.css  (only menu.html)
+   Category buttons: Bread, Cakes, Pastries, Drinks.
+   (Product cards are in components.css)
+   ========================================================== */
+
+.category-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.category-nav a {
+  padding: 8px 20px;
+  border: 2px solid var(--crust);
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.category-nav a:hover {
+  background: var(--crust);
+  color: var(--white);
+}
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+@media (max-width: 480px) {
+  .category-nav {
+    gap: 8px;
+  }
+
+  .category-nav a {
+    padding: 6px 14px;
+    font-size: 0.95rem;
+  }
+}

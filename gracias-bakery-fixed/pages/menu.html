@@ -10,7 +10,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;800&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="menu.css">
+  <!-- Favicon: small icon in the browser tab -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥐</text></svg>">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/menu.css">
 </head>
 <body>
 
@@ -18,7 +22,9 @@
   <header class="site-header">
     <div class="container header-inner">
       <a href="index.html" class="logo">Gracias Bakery</a>
-      <nav class="nav">
+            <!-- Menu button (only visible on phones) -->
+      <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+      <nav class="nav" id="nav">
         <a href="index.html">Home</a>
         <a href="menu.html" class="active">Menu</a>
         <a href="about.html">About</a>
@@ -54,7 +60,7 @@
           <!-- ONE PRODUCT CARD: copy this whole block to add a new product -->
           <article class="product">
             <div class="product-img">
-              <img src="images/fresh bread.jpg" alt="Fresh white bread">
+              <img src="../images/fresh bread.jpg" alt="Fresh white bread">
             </div>
             <div class="product-info">
               <h3>Fresh Bread</h3>
@@ -62,30 +68,33 @@
               <p class="price">1,000 RWF</p>
               <!-- %20 means a space inside a web link -->
               <a class="order-link" href="https://wa.me/250788000000?text=Hello,%20I%20want%20to%20order%20Fresh%20Bread">Order</a>
+              <a class="details-link" href="product.html?id=fresh-bread">Details</a>
             </div>
           </article>
 
           <article class="product">
             <div class="product-img">
-              <img src="images/baguette.jpg" alt="Baguette">
+              <img src="../images/baguette.jpg" alt="Baguette">
             </div>
             <div class="product-info">
               <h3>Baguette</h3>
               <p>Crispy outside, soft inside.</p>
               <p class="price">800 RWF</p>
               <a class="order-link" href="https://wa.me/250788000000?text=Hello,%20I%20want%20to%20order%20Baguette">Order</a>
+              <a class="details-link" href="product.html?id=baguette">Details</a>
             </div>
           </article>
 
           <article class="product">
             <div class="product-img">
-              <img src="images/brown bread.jpg" alt="Brown Bread">
+              <img src="../images/brown bread.jpg" alt="Brown Bread">
             </div>
             <div class="product-info">
               <h3>Brown Bread</h3>
               <p>Whole wheat, healthy and filling.</p>
               <p class="price">1,200 RWF</p>
               <a class="order-link" href="https://wa.me/250788000000?text=Hello,%20I%20want%20to%20order%20Brown%20Bread">Order</a>
+              <a class="details-link" href="product.html?id=brown-bread">Details</a>
             </div>
           </article>
 
@@ -100,32 +109,41 @@
         <div class="product-grid">
 
           <article class="product">
-            <div class="product-img"><img src="images/Birthday Cake.jpg" alt="Birthday Cake"></div>
+            <div class="product-img">
+              <img src="../images/birthday cake.jpg" alt="Birthday Cake">
+            </div>
             <div class="product-info">
               <h3>Birthday Cake</h3>
               <p>Custom message and design.</p>
               <p class="price">From 15,000 RWF</p>
               <a class="order-link" href="https://wa.me/250788000000?text=Hello,%20I%20want%20to%20order%20a%20Birthday%20Cake">Order</a>
+              <a class="details-link" href="product.html?id=birthday-cake">Details</a>
             </div>
           </article>
 
           <article class="product">
-            <div class="product-img"><img src="images/Cake Slice.jpg" alt="Cake Slice"></div>
+            <div class="product-img">
+              <img src="../images/cake slice.jpg" alt="Cake Slice">
+            </div>
             <div class="product-info">
               <h3>Cake Slice</h3>
               <p>Vanilla or chocolate.</p>
               <p class="price">1,500 RWF</p>
               <a class="order-link" href="https://wa.me/250788000000?text=Hello,%20I%20want%20to%20order%20Cake%20Slices">Order</a>
+              <a class="details-link" href="product.html?id=cake-slice">Details</a>
             </div>
           </article>
 
           <article class="product">
-            <div class="product-img"><img src="images/Cup cakes.jpg" alt="Cupcakes"></div>
+            <div class="product-img">
+              <img src="../images/cup cakes.jpg" alt="Cupcakes">
+            </div>
             <div class="product-info">
               <h3>Cupcakes (6)</h3>
               <p>A box of six with icing.</p>
               <p class="price">5,000 RWF</p>
               <a class="order-link" href="https://wa.me/250788000000?text=Hello,%20I%20want%20to%20order%20Cupcakes">Order</a>
+              <a class="details-link" href="product.html?id=cupcakes">Details</a>
             </div>
           </article>
 
@@ -140,32 +158,41 @@
         <div class="product-grid">
 
           <article class="product">
-            <div class="product-img"><img src="images/Butter Croissant.jpg" alt="Butter Croissant"></div>
+            <div class="product-img">
+              <img src="../images/Butter Croissant.jpg" alt="Butter Croissant">
+            </div>
             <div class="product-info">
               <h3>Butter Croissant</h3>
               <p>Flaky, golden and buttery.</p>
               <p class="price">800 RWF</p>
               <a class="order-link" href="https://wa.me/250788000000?text=Hello,%20I%20want%20to%20order%20Croissants">Order</a>
+              <a class="details-link" href="product.html?id=croissant">Details</a>
             </div>
           </article>
 
           <article class="product">
-            <div class="product-img"><img src="images/Doughnuts.jpg" alt="Doughnuts"></div>
+            <div class="product-img">
+              <img src="../images/Doughnuts.jpg" alt="Doughnuts">
+            </div>
             <div class="product-info">
               <h3>Doughnut</h3>
               <p>Sweet, soft and fresh.</p>
               <p class="price">500 RWF</p>
               <a class="order-link" href="https://wa.me/250788000000?text=Hello,%20I%20want%20to%20order%20Doughnuts">Order</a>
+              <a class="details-link" href="product.html?id=doughnut">Details</a>
             </div>
           </article>
 
           <article class="product">
-            <div class="product-img"><img src="images/Meat Pie.jpg" alt="Meat Pie"></div>
+            <div class="product-img">
+              <img src="../images/meat pie.jpg" alt="Meat Pie">
+            </div>
             <div class="product-info">
               <h3>Meat Pie</h3>
               <p>Savory filling in a crisp crust.</p>
               <p class="price">1,000 RWF</p>
               <a class="order-link" href="https://wa.me/250788000000?text=Hello,%20I%20want%20to%20order%20Meat%20Pies">Order</a>
+              <a class="details-link" href="product.html?id=meat-pie">Details</a>
             </div>
           </article>
 
@@ -180,32 +207,41 @@
         <div class="product-grid">
 
           <article class="product">
-            <div class="product-img"><img src="images/Coffee.jpg" alt="Coffee"></div>
+            <div class="product-img">
+              <img src="../images/coffee.jpg" alt="Coffee">
+            </div>
             <div class="product-info">
               <h3>Coffee</h3>
               <p>Fresh Rwandan coffee.</p>
               <p class="price">1,000 RWF</p>
               <a class="order-link" href="https://wa.me/250788000000?text=Hello,%20I%20want%20to%20order%20Coffee">Order</a>
+              <a class="details-link" href="product.html?id=coffee">Details</a>
             </div>
           </article>
 
           <article class="product">
-            <div class="product-img"><img src="images/Milk Tea.jpg" alt="Milk Tea"></div>
+            <div class="product-img">
+              <img src="../images/milk tea.jpg" alt="Milk Tea">
+            </div>
             <div class="product-info">
               <h3>Milk Tea</h3>
               <p>Hot tea with milk.</p>
               <p class="price">800 RWF</p>
               <a class="order-link" href="https://wa.me/250788000000?text=Hello,%20I%20want%20to%20order%20Milk%20Tea">Order</a>
+              <a class="details-link" href="product.html?id=milk-tea">Details</a>
             </div>
           </article>
 
           <article class="product">
-            <div class="product-img"><img src="images/Fresh Juice.jpg" alt="Fresh Juice"></div>
+            <div class="product-img">
+              <img src="../images/fresh juice.jpg" alt="Fresh Juice">
+            </div>
             <div class="product-info">
               <h3>Fresh Juice</h3>
               <p>Passion, mango or pineapple.</p>
               <p class="price">1,500 RWF</p>
               <a class="order-link" href="https://wa.me/250788000000?text=Hello,%20I%20want%20to%20order%20Fresh%20Juice">Order</a>
+              <a class="details-link" href="product.html?id=fresh-juice">Details</a>
             </div>
           </article>
 
@@ -222,5 +258,7 @@
     </div>
   </footer>
 
+  <script src="script.js"></script>
+  <script src="cart.js"></script>
 </body>
 </html>

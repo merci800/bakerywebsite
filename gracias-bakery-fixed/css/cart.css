@@ -1,0 +1,196 @@
+/* ==========================================================
+   cart.css  (only cart.html)
+   Cart page: product list on the left, summary + form on the right.
+   (Stepper + and - buttons are in components.css)
+   ========================================================== */
+
+/* The "hidden" attribute must always win over display: grid */
+[hidden] {
+  display: none !important;
+}
+
+.cart-layout {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+/* One product row: photo | name + quantity | line total */
+.cart-item {
+  display: grid;
+  grid-template-columns: 72px 1fr auto;
+  gap: 16px;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 2px solid rgba(74, 44, 29, 0.2);
+}
+
+.cart-thumb {
+  width: 72px;
+  height: 72px;
+  border-radius: 12px;
+  background: #f6d98c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  overflow: hidden;
+}
+
+.cart-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cart-item h3 {
+  font-family: var(--font-title);
+  font-size: 1.15rem;
+}
+
+.cart-unit {
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+}
+
+.cart-line {
+  font-weight: 800;
+  text-align: right;
+}
+
+.remove-btn,
+.clear-btn {
+  background: none;
+  border: none;
+  color: var(--berry);
+  text-decoration: underline;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.remove-btn {
+  margin-top: 6px;
+}
+
+.clear-btn {
+  margin-top: 16px;
+}
+
+/* Summary box */
+.summary {
+  background: var(--butter);
+  border: 2px solid var(--crust);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.summary h2 {
+  font-size: 1.6rem;
+  margin-bottom: 14px;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.small-note {
+  font-size: 0.9rem;
+  margin: 6px 0 18px;
+}
+
+/* Customer form */
+.order-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.order-form label {
+  font-weight: 700;
+  margin-top: 8px;
+}
+
+.order-form input[type="text"],
+.order-form textarea {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid var(--crust);
+  border-radius: 10px;
+  background: var(--white);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--crust);
+}
+
+.order-form input:focus,
+.order-form textarea:focus {
+  outline: 3px solid var(--berry);
+  outline-offset: 1px;
+}
+
+.choice-row {
+  display: flex;
+  gap: 20px;
+}
+
+.choice {
+  font-weight: 600;
+  margin-top: 0;
+  cursor: pointer;
+}
+
+.order-form .btn {
+  margin-top: 18px;
+  text-align: center;
+}
+
+/* Empty cart message */
+.empty-cart {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.empty-cart p {
+  margin-bottom: 20px;
+}
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+@media (max-width: 760px) {
+  .cart-layout {
+    grid-template-columns: 1fr; /* list on top, summary below */
+    gap: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cart-item {
+    grid-template-columns: 56px 1fr;
+  }
+
+  .cart-thumb {
+    width: 56px;
+    height: 56px;
+    font-size: 1.8rem;
+  }
+
+  .cart-line {
+    grid-column: 1 / -1;       /* total goes on its own row */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+  }
+
+  .summary {
+    padding: 18px;
+  }
+}

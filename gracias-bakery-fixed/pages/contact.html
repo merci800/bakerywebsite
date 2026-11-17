@@ -10,7 +10,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;800&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="contact.css">
+  <!-- Favicon: small icon in the browser tab -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥐</text></svg>">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/contact.css">
 </head>
 <body>
 
@@ -18,7 +22,9 @@
   <header class="site-header">
     <div class="container header-inner">
       <a href="index.html" class="logo">Gracias Bakery</a>
-      <nav class="nav">
+            <!-- Menu button (only visible on phones) -->
+      <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+      <nav class="nav" id="nav">
         <a href="index.html">Home</a>
         <a href="menu.html">Menu</a>
         <a href="about.html">About</a>
@@ -67,8 +73,29 @@
       </div>
     </section>
 
-    <!-- ========== CUSTOM CAKE FORM ========== -->
+    <!-- ========== DELIVERY ========== -->
     <section class="section">
+      <div class="container">
+        <h2>Delivery</h2>
+        <div class="info-grid">
+          <div>
+            <h3>Areas we deliver</h3>
+            <p>Kimironko, Remera, Kacyiru, Nyarutarama (edit this list)</p>
+          </div>
+          <div>
+            <h3>Delivery fee</h3>
+            <p>From 1,000 RWF depending on distance</p>
+          </div>
+          <div>
+            <h3>How to order</h3>
+            <p>Send us a WhatsApp message. We confirm the price and time.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CUSTOM CAKE FORM ========== -->
+    <section class="section section-white">
       <div class="container">
         <h2>Request a custom cake</h2>
         <p class="form-intro">Fill in the form and press the button. It opens WhatsApp with your request already written, and you just press send.</p>
@@ -111,7 +138,7 @@
     </section>
 
     <!-- ========== MAP ========== -->
-    <section class="section section-white">
+    <section class="section">
       <div class="container">
         <h2>Find us</h2>
         <!-- Change "Kigali" in the link to your real address, e.g. q=Gracias+Bakery+Kimironko+Kigali -->
@@ -171,5 +198,7 @@
     });
   </script>
 
+  <script src="script.js"></script>
+  <script src="cart.js"></script>
 </body>
 </html>

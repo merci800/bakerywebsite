@@ -1,0 +1,413 @@
+/* ==========================================================
+   home.css  (only index.html)
+   Sections of the Home page, from top to bottom:
+   1. Announcement bar     6. Custom cakes (dark)
+   2. Hero                 7. Why choose us
+   3. Search + categories  8. About teaser
+   4. Product cards        9. Visit us
+   5. How it works
+   (Reviews, info boxes, map and the floating WhatsApp
+    button are in components.css)
+   If something looks wrong ONLY on the Home page, look here.
+   ========================================================== */
+
+/* ---------- 1. ANNOUNCEMENT BAR ---------- */
+.announce {
+  background: var(--crust);
+  color: var(--butter);
+  text-align: center;
+  font-size: 0.92rem;
+  padding: 8px 12px;
+}
+
+/* ---------- 2. HERO ---------- */
+.hero {
+  padding: 70px 0;
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr; /* text | picture */
+  gap: 40px;
+  align-items: center;
+}
+
+.hero h1 {
+  font-family: var(--font-title);
+  font-size: clamp(2.6rem, 7vw, 4.4rem); /* grows/shrinks with screen */
+  line-height: 1.05;
+  margin-bottom: 18px;
+}
+
+.hero p {
+  font-size: 1.15rem;
+  max-width: 46ch;
+  margin-bottom: 28px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* The small "✓ Baked daily" list */
+.trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  margin-top: 24px;
+  list-style: none;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.trust li::before {
+  content: "\2713\00a0";
+  color: var(--berry);
+}
+
+/* Photo box (arch shape). Shows images/hero.jpg, or an emoji if it is missing */
+.hero-photo {
+  aspect-ratio: 4 / 4.6;
+  background: linear-gradient(160deg, #e9a04b, #b8651f);
+  border: 2px solid var(--crust);
+  border-radius: 999px 999px 18px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 6rem;
+  overflow: hidden;
+}
+
+.hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------- 3. SEARCH + CATEGORY BUTTONS ---------- */
+.find {
+  padding-bottom: 8px;
+}
+
+.search-box {
+  width: 100%;
+  padding: 15px 22px;
+  border: 2px solid var(--crust);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--crust);
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+}
+
+.search-box:focus {
+  outline: 3px solid var(--berry);
+  outline-offset: 2px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.chip {
+  padding: 8px 18px;
+  border: 2px solid var(--crust);
+  border-radius: 999px;
+  background: none;
+  color: var(--crust);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.chip:hover {
+  background: rgba(74, 44, 29, 0.1);
+}
+
+.chip.active {
+  background: var(--crust);
+  color: var(--butter);
+}
+
+/* ---------- 4. PRODUCT CARDS (built by home.js) ---------- */
+.menu-section {
+  padding-top: 30px;
+}
+
+.product-home {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--card);
+}
+
+.product-home .product-img {
+  height: 150px;
+  overflow: hidden;
+}
+
+.product-home .product-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.product-home .product-info p {
+  font-size: 0.95rem;
+}
+
+.product-home .price {
+  margin-bottom: 12px;
+}
+
+.product-home .product-info h3 a:hover {
+  color: var(--berry);
+}
+
+/* Buttons stay at the bottom of every card */
+.card-actions {
+  margin-top: auto;
+}
+
+.card-actions .cart-btn {
+  margin-top: 0;
+}
+
+.wa-link {
+  display: block;
+  margin-top: 10px;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--berry);
+}
+
+.wa-link:hover {
+  text-decoration: underline;
+}
+
+/* Label in the corner: "Best seller", "Fresh today" */
+.badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--berry);
+  color: var(--white);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.no-results {
+  margin-top: 20px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.see-all {
+  margin-top: 30px;
+  text-align: center;
+}
+
+/* ---------- 5. HOW IT WORKS ---------- */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.step {
+  border-top: 3px solid var(--crust);
+  padding-top: 14px;
+}
+
+.step h3 {
+  font-family: var(--font-title);
+  font-size: 1.25rem;
+  margin-bottom: 4px;
+}
+
+/* ---------- 6. CUSTOM CAKES (dark section) ---------- */
+.dark {
+  background: var(--crust);
+  color: var(--butter);
+}
+
+.cake {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.dark h2 {
+  margin-bottom: 14px;
+}
+
+.dark ul {
+  margin: 14px 0 24px 20px;
+}
+
+.dark .btn {
+  background: var(--berry);
+  color: var(--white);
+}
+
+.dark .btn:hover {
+  background: var(--berry-dark);
+}
+
+.cake-tiles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.cake-tiles div {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: #6b3f29;
+  font-size: 2.6rem;
+}
+
+/* ---------- 7. WHY CHOOSE US ---------- */
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.why {
+  padding: 20px;
+  border: 2px solid var(--crust);
+  border-radius: 14px;
+  background: var(--card);
+}
+
+.why-icon {
+  font-size: 2rem;
+}
+
+.why h3 {
+  font-family: var(--font-title);
+  font-size: 1.1rem;
+  margin: 6px 0 2px;
+}
+
+.why p {
+  font-size: 0.95rem;
+}
+
+/* ---------- 8. ABOUT TEASER ---------- */
+.about-teaser {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.about-teaser p {
+  margin-bottom: 20px;
+  max-width: 60ch;
+}
+
+.team-photo {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--crust);
+  border-radius: 18px;
+  background: linear-gradient(160deg, #c98a5b, #7a4a2e);
+  font-size: 4.5rem;
+  overflow: hidden;
+}
+
+.team-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------- 9. VISIT US ---------- */
+.visit {
+  background: var(--card);
+  border-top: 2px solid var(--crust);
+}
+
+.visit .map {
+  margin-top: 28px;
+}
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+/* Phones and small tablets */
+@media (max-width: 760px) {
+  .hero {
+    padding: 40px 0;
+  }
+
+  .hero-inner,
+  .cake,
+  .about-teaser {
+    grid-template-columns: 1fr; /* stack everything */
+    gap: 28px;
+  }
+
+  .hero-photo {
+    max-width: 340px;
+  }
+
+  .steps {
+    grid-template-columns: 1fr;
+  }
+
+  .why-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .team-photo {
+    max-width: 300px;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .announce {
+    font-size: 0.85rem;
+  }
+
+  .hero-buttons .btn {
+    width: 100%;        /* full-width buttons */
+    text-align: center;
+  }
+
+  .hero-photo {
+    font-size: 5rem;
+  }
+
+  .why-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .chips {
+    gap: 8px;
+  }
+
+  .chip {
+    padding: 6px 14px;
+  }
+}

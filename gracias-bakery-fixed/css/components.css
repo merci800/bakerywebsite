@@ -1,0 +1,252 @@
+/* ==========================================================
+   components.css  (loaded on every page)
+   Pieces that are reused on more than one page:
+   - product cards (Home + Menu)
+   - info boxes (Home + Contact)
+   If a product card looks wrong, look here.
+   ========================================================== */
+
+/* ---------- PRODUCT CARDS ---------- */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* as many columns as fit */
+  gap: 24px;
+}
+
+.product {
+  border: 2px solid var(--crust);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--butter);
+}
+
+.product-img {
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  background: #f6d98c;
+}
+
+/* Makes any photo fit the box without stretching */
+.product-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-info {
+  padding: 16px;
+}
+
+.product-info h3 {
+  font-family: var(--font-title);
+  font-size: 1.25rem;
+}
+
+.price {
+  font-weight: 800;
+  color: var(--berry);
+  margin-top: 6px;
+}
+
+/* Small "Order" button inside a card */
+.order-link {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 20px;
+  border-radius: 999px;
+  background: var(--berry);
+  color: var(--white);
+  font-weight: 700;
+  transition: background 0.2s;
+}
+
+.order-link:hover {
+  background: var(--berry-dark);
+}
+
+/* "Details" link inside a card */
+.details-link {
+  display: inline-block;
+  margin: 12px 0 0 10px;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.details-link:hover {
+  color: var(--berry);
+}
+
+/* ---------- INFO BOXES (hours, location, phone) ---------- */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+.info-grid h3 {
+  font-family: var(--font-title);
+  margin-bottom: 6px;
+}
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+@media (max-width: 760px) {
+  .product-grid {
+    gap: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-grid {
+    grid-template-columns: 1fr; /* one card per row */
+  }
+
+  .product-img {
+    height: 200px;
+  }
+}
+
+/* ==========================================================
+   CART PIECES (used on every page)
+   ========================================================== */
+
+/* "Cart (2)" link in the header */
+.nav {
+  margin-left: auto; /* pushes the menu links and the cart to the right */
+}
+
+.cart-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 22px;
+  font-weight: 600;
+}
+
+.cart-link:hover,
+.cart-link.active {
+  color: var(--berry);
+}
+
+/* Round number next to "Cart" */
+.cart-count {
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--berry);
+  color: var(--white);
+  font-size: 0.8rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-count.empty {
+  display: none; /* hidden when the cart has nothing */
+}
+
+/* "Add to cart" button inside product cards */
+.cart-btn {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px;
+  border: 2px solid var(--crust);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--crust);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.cart-btn:hover {
+  background: var(--crust);
+  color: var(--white);
+}
+
+/* Big button version (product page and cart page) */
+.btn-cart {
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 1rem;
+}
+
+/* Quantity buttons:  [ - 1 + ] */
+.stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 2px solid var(--crust);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.stepper button {
+  width: 38px;
+  height: 38px;
+  border: none;
+  background: transparent;
+  color: var(--crust);
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.stepper button:hover {
+  background: var(--crust);
+  color: var(--white);
+}
+
+.stepper span {
+  min-width: 36px;
+  text-align: center;
+  font-weight: 800;
+}
+
+/* Small message: "Added to cart" */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--crust);
+  color: var(--butter);
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-weight: 700;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s, transform 0.25s;
+  z-index: 50;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* On phones: Cart sits next to the ☰ button, links open below */
+@media (max-width: 760px) {
+  .cart-link {
+    order: 1;
+    margin-left: auto;
+  }
+
+  .menu-toggle {
+    order: 2;
+  }
+
+  .nav {
+    order: 3;
+  }
+}

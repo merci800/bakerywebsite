@@ -1,0 +1,85 @@
+/* ==========================================================
+   contact.css  (only contact.html)
+   Custom cake form and Google Map.
+   (Info boxes are in components.css)
+   ========================================================== */
+
+.form-intro {
+  max-width: 60ch;
+  margin: -14px 0 24px;
+}
+
+.cake-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 520px;
+}
+
+.cake-form label {
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+.cake-form input,
+.cake-form select,
+.cake-form textarea {
+  padding: 12px;
+  border: 2px solid var(--crust);
+  border-radius: 10px;
+  background: var(--white);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--crust);
+}
+
+.cake-form input:focus,
+.cake-form select:focus,
+.cake-form textarea:focus {
+  outline: 3px solid var(--berry);
+  outline-offset: 1px;
+}
+
+.cake-form .btn {
+  margin-top: 20px;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 1rem;
+}
+
+/* Google Map */
+.map {
+  width: 100%;
+  height: 380px;
+  border: 2px solid var(--crust);
+  border-radius: 16px;
+}
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+@media (max-width: 760px) {
+  .map {
+    height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-intro {
+    margin-top: -8px;
+  }
+
+  .cake-form {
+    max-width: 100%;
+  }
+
+  .cake-form .btn {
+    width: 100%;
+  }
+
+  .map {
+    height: 240px;
+  }
+}

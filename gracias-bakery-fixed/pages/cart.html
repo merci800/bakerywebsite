@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your cart | Gracias Bakery</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;800&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥐</text></svg>">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/cart.css">
+</head>
+<body>
+
+  <!-- ========== HEADER (cart.js adds the "Cart" link by itself) ========== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">Gracias Bakery</a>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+      <nav class="nav" id="nav">
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="page-title">
+      <div class="container">
+        <h1>Your cart</h1>
+        <p>Check your order, then send it to us on WhatsApp.</p>
+      </div>
+    </section>
+
+    <section class="section section-white">
+      <div class="container">
+
+        <!-- Shown when the cart is empty -->
+        <div id="cart-empty" class="empty-cart" hidden>
+          <h2>Your cart is empty</h2>
+          <p>Choose something fresh from our menu.</p>
+          <a class="btn" href="menu.html">Go to the menu</a>
+        </div>
+
+        <!-- Shown when the cart has products -->
+        <div id="cart-content" class="cart-layout" hidden>
+
+          <!-- LEFT: the products (JavaScript fills #cart-items) -->
+          <div>
+            <div id="cart-items"></div>
+            <button type="button" id="clear-cart" class="clear-btn">Clear cart</button>
+          </div>
+
+          <!-- RIGHT: total + customer details -->
+          <aside class="summary">
+            <h2>Order summary</h2>
+            <div class="total-row">
+              <span>Total</span>
+              <strong id="cart-total">0 RWF</strong>
+            </div>
+            <p id="cart-note" class="small-note"></p>
+
+            <form id="order-form" class="order-form">
+              <label for="customer-name">Your name</label>
+              <input type="text" id="customer-name" required>
+
+              <label>How will you receive it?</label>
+              <div class="choice-row">
+                <label class="choice"><input type="radio" name="type" value="Pickup" checked> Pickup</label>
+                <label class="choice"><input type="radio" name="type" value="Delivery"> Delivery</label>
+              </div>
+
+              <!-- Only shown when "Delivery" is chosen -->
+              <div id="address-box" hidden>
+                <label for="customer-address">Delivery address</label>
+                <input type="text" id="customer-address" placeholder="Area, street, house number">
+              </div>
+
+              <label for="customer-note">Note (optional)</label>
+              <textarea id="customer-note" rows="3" placeholder="Time you need it, allergies..."></textarea>
+
+              <button type="submit" class="btn btn-cart">Send order on WhatsApp</button>
+            </form>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 Gracias Bakery. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Order matters: products.js, then script.js, then cart.js, then this page's code -->
+  <script src="products.js"></script>
+  <script src="script.js"></script>
+  <script src="cart.js"></script>
+  <script>
+    // Find the parts of the page we will change
+    const emptyBox = document.getElementById("cart-empty");
+    const contentBox = document.getElementById("cart-content");
+    const itemsBox = document.getElementById("cart-items");
+    const totalBox = document.getElementById("cart-total");
+    const noteBox = document.getElementById("cart-note");
+    const orderForm = document.getElementById("order-form");
+    const addressBox = document.getElementById("address-box");
+
+    // Get the cart items together with their product data (name, price, photo)
+    function getCartLines() {
+      const lines = [];
+      Cart.get().forEach(function (item) {
+        const product = products.find(function (p) { return p.id === item.id; });
+        if (product) {
+          lines.push({ product: product, qty: item.qty });
+        }
+      });
+      return lines;
+    }
+
+    // Draw the cart on the page
+    function renderCart() {
+      const lines = getCartLines();
+
+      // Empty cart: show the message and stop
+      emptyBox.hidden = lines.length > 0;
+      contentBox.hidden = lines.length === 0;
+      if (lines.length === 0) return;
+
+      let html = "";
+      let total = 0;
+      let hasFromPrice = false;
+
+      lines.forEach(function (line) {
+        const p = line.product;
+        const lineTotal = Cart.price(p.price) * line.qty;
+        total += lineTotal;
+        if (p.price.toLowerCase().startsWith("from")) hasFromPrice = true;
+
+        html +=
+          '<div class="cart-item">' +
+            '<div class="cart-thumb"><img src="' + p.images[0] + '" alt="' + p.name + '" data-emoji="' + p.emoji + '"></div>' +
+            '<div>' +
+              '<h3>' + p.name + '</h3>' +
+              '<p class="cart-unit">' + p.price + '</p>' +
+              '<div class="stepper">' +
+                '<button type="button" data-action="minus" data-id="' + p.id + '" aria-label="Less ' + p.name + '">&minus;</button>' +
+                '<span>' + line.qty + '</span>' +
+                '<button type="button" data-action="plus" data-id="' + p.id + '" aria-label="More ' + p.name + '">+</button>' +
+              '</div>' +
+            '</div>' +
+            '<div class="cart-line">' +
+              Cart.money(lineTotal) +
+              '<br><button type="button" class="remove-btn" data-action="remove" data-id="' + p.id + '">Remove</button>' +
+            '</div>' +
+          '</div>';
+      });
+
+      itemsBox.innerHTML = html;
+      totalBox.textContent = Cart.money(total);
+      noteBox.textContent = hasFromPrice
+        ? "Some prices start from a minimum. We confirm the final price on WhatsApp."
+        : "Delivery fee (if any) is confirmed on WhatsApp.";
+
+      // If a photo is missing, show the emoji instead
+      itemsBox.querySelectorAll(".cart-thumb img").forEach(function (img) {
+        img.addEventListener("error", function () {
+          img.parentElement.textContent = img.dataset.emoji;
+        });
+      });
+    }
+
+    // Clicks on + / - / Remove (one listener for all buttons)
+    itemsBox.addEventListener("click", function (event) {
+      const button = event.target.closest("button[data-action]");
+      if (!button) return;
+
+      const id = button.dataset.id;
+      const item = Cart.get().find(function (i) { return i.id === id; });
+      if (!item) return;
+
+      if (button.dataset.action === "plus") Cart.setQty(id, item.qty + 1);
+      if (button.dataset.action === "minus") Cart.setQty(id, item.qty - 1);
+      if (button.dataset.action === "remove") Cart.remove(id);
+
+      renderCart();
+    });
+
+    // "Clear cart" button
+    document.getElementById("clear-cart").addEventListener("click", function () {
+      if (confirm("Remove everything from your cart?")) {
+        Cart.clear();
+        renderCart();
+      }
+    });
+
+    // Show the address field only for Delivery
+    orderForm.addEventListener("change", function () {
+      const type = orderForm.elements["type"].value;
+      addressBox.hidden = type !== "Delivery";
+      document.getElementById("customer-address").required = type === "Delivery";
+    });
+
+    // Send the order to WhatsApp
+    orderForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const name = document.getElementById("customer-name").value;
+      const type = orderForm.elements["type"].value;
+      const address = document.getElementById("customer-address").value;
+      const note = document.getElementById("customer-note").value;
+
+      let text = "Hello Gracias Bakery, I want to order:\n";
+      let total = 0;
+
+      getCartLines().forEach(function (line) {
+        const p = line.product;
+        const lineTotal = Cart.price(p.price) * line.qty;
+        total += lineTotal;
+        const from = p.price.toLowerCase().startsWith("from") ? " (starting price)" : "";
+        text += "- " + line.qty + " x " + p.name + " = " + Cart.money(lineTotal) + from + "\n";
+      });
+
+      text += "\nTotal: " + Cart.money(total) + "\n\n";
+      text += "Name: " + name + "\n";
+      text += "Pickup or delivery: " + type + "\n";
+      if (type === "Delivery") text += "Address: " + address + "\n";
+      text += "Note: " + (note || "None");
+
+      const link = "https://wa.me/" + Cart.whatsapp + "?text=" + encodeURIComponent(text);
+      window.open(link, "_blank");
+    });
+
+    renderCart();
+  </script>
+
+</body>
+</html>

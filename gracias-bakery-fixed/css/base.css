@@ -1,0 +1,223 @@
+/* ==========================================================
+   base.css  (loaded on EVERY page)
+   Colors, fonts, reset, header, menu button, buttons,
+   sections, footer.
+   If something looks wrong on ALL pages, look here.
+   ========================================================== */
+
+/* 1. COLORS & FONTS - change a color here and it changes everywhere */
+:root {
+  --butter: #fff1c1;     /* page background */
+  --crust: #4a2c1d;      /* main text (dark brown) */
+  --berry: #b8234f;      /* buttons and highlights */
+  --berry-dark: #8f1a3c; /* button hover */
+  --white: #ffffff;
+
+  --font-title: "Fraunces", Georgia, serif;
+  --font-body: "Nunito Sans", Arial, sans-serif;
+}
+
+/* 2. RESET - removes default browser spacing */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth; /* smooth scrolling for # links */
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--butter);
+  color: var(--crust);
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:focus-visible {
+  outline: 3px solid var(--berry);
+  outline-offset: 3px;
+}
+
+/* Keeps content centered and not too wide */
+.container {
+  width: 90%;
+  max-width: 1050px;
+  margin: 0 auto;
+}
+
+/* 3. HEADER (logo + menu) */
+.site-header {
+  padding: 18px 0;
+  border-bottom: 2px solid var(--crust);
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.logo {
+  font-family: var(--font-title);
+  font-size: 1.7rem;
+  font-weight: 800;
+}
+
+.nav {
+  display: flex;
+  gap: 22px;
+  font-weight: 600;
+}
+
+.nav a:hover,
+.nav a.active {
+  color: var(--berry);
+}
+
+/* The ☰ button is hidden on computers */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: 2px solid var(--crust);
+  border-radius: 10px;
+  padding: 4px 12px;
+  font-size: 1.5rem;
+  color: var(--crust);
+  cursor: pointer;
+}
+
+/* 4. BUTTONS */
+.btn {
+  display: inline-block;
+  padding: 14px 28px;
+  border-radius: 999px;
+  font-weight: 700;
+  background: var(--berry);
+  color: var(--white);
+  transition: background 0.2s;
+}
+
+.btn:hover {
+  background: var(--berry-dark);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--crust);
+  border: 2px solid var(--crust);
+}
+
+.btn-outline:hover {
+  background: var(--crust);
+  color: var(--white);
+}
+
+/* 5. SECTIONS (used by all pages) */
+.section {
+  padding: 60px 0;
+}
+
+.section-white {
+  background: var(--white);
+}
+
+.section h2 {
+  font-family: var(--font-title);
+  font-size: 2.2rem;
+  margin-bottom: 30px;
+}
+
+.cta {
+  text-align: center;
+}
+
+/* Title area at the top of Menu, About and Contact */
+.page-title {
+  padding: 50px 0 30px;
+}
+
+.page-title h1 {
+  font-family: var(--font-title);
+  font-size: clamp(2.2rem, 6vw, 3.4rem);
+  margin-bottom: 10px;
+}
+
+/* Underlined text link */
+.text-link {
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.text-link:hover {
+  color: var(--berry);
+}
+
+/* 6. FOOTER */
+.site-footer {
+  background: var(--crust);
+  color: var(--butter);
+  padding: 26px 0;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+/* Phones and small tablets (760px and smaller) */
+@media (max-width: 760px) {
+  /* show the ☰ button, hide links until it is pressed */
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    gap: 0;
+  }
+
+  .nav.open {
+    display: flex;
+  }
+
+  .nav a {
+    padding: 12px 0;
+    border-top: 1px solid rgba(74, 44, 29, 0.25);
+  }
+
+  .section {
+    padding: 44px 0;
+  }
+
+  .section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 22px;
+  }
+
+  .page-title {
+    padding: 36px 0 20px;
+  }
+}
+
+/* Small phones (480px and smaller) */
+@media (max-width: 480px) {
+  .logo {
+    font-size: 1.4rem;
+  }
+
+  .btn {
+    padding: 12px 22px;
+  }
+}

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product | Gracias Bakery</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;800&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Favicon: small icon in the browser tab -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥐</text></svg>">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/product.css">
+</head>
+<body>
+
+  <!-- ========== HEADER ("Menu" stays active) ========== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">Gracias Bakery</a>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+      <nav class="nav" id="nav">
+        <a href="index.html">Home</a>
+        <a href="menu.html" class="active">Menu</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+
+        <a class="back-link" href="menu.html">&larr; Back to menu</a>
+
+        <!-- JavaScript fills this box with the product details -->
+        <div id="product-box"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 Gracias Bakery. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- products.js must come BEFORE the code below, because we use its list -->
+  <script src="products.js"></script>
+  <script src="script.js"></script>
+  <script src="cart.js"></script>
+  <script>
+    // Your WhatsApp number (country code first, no + or spaces)
+    const whatsappNumber = "250788000000";
+
+    // 1. Read the id from the link. Example: product.html?id=baguette -> "baguette"
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get("id");
+
+    // 2. Find that product in the list
+    const product = products.find(function (p) {
+      return p.id === productId;
+    });
+
+    const box = document.getElementById("product-box");
+
+    // 3. If the id is wrong, show a message
+    if (!product) {
+      box.innerHTML = "<h1>Product not found</h1><p>Please go back to the <a class='text-link' href='menu.html'>menu</a>.</p>";
+    } else {
+      showProduct(product);
+    }
+
+    // 4. Build the page for the chosen product
+    function showProduct(p) {
+      document.title = p.name + " | Gracias Bakery";
+
+      // Thumbnails (small pictures under the big one)
+      let thumbs = "";
+      p.images.forEach(function (src, index) {
+        thumbs += '<button class="thumb" data-src="' + src + '" aria-label="Show photo ' + (index + 1) + '">' +
+                  '<img src="' + src + '" alt="' + p.name + ' photo ' + (index + 1) + '">' +
+                  '</button>';
+      });
+
+      // List of details
+      let details = "";
+      p.details.forEach(function (line) {
+        details += "<li>" + line + "</li>";
+      });
+
+      // WhatsApp message for this product
+      const message = "Hello Gracias Bakery, I want to order: " + p.name;
+      const orderLink = "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(message);
+
+      // Put everything on the page
+      box.innerHTML =
+        '<div class="product-page">' +
+          '<div class="gallery">' +
+            '<div class="main-photo" id="main-photo">' +
+              '<img id="main-img" src="' + p.images[0] + '" alt="' + p.name + '">' +
+            '</div>' +
+            '<div class="thumbs">' + thumbs + '</div>' +
+          '</div>' +
+          '<div class="product-text">' +
+            '<p class="category">' + p.category + '</p>' +
+            '<h1>' + p.name + '</h1>' +
+            '<p class="price big-price">' + p.price + '</p>' +
+            '<p>' + p.description + '</p>' +
+            '<h3>Details</h3>' +
+            '<ul class="detail-list">' + details + '</ul>' +
+            '<div class="qty-row">' +
+              '<span>Quantity</span>' +
+              '<div class="stepper">' +
+                '<button type="button" id="qty-minus" aria-label="Less">&minus;</button>' +
+                '<span id="qty-value">1</span>' +
+                '<button type="button" id="qty-plus" aria-label="More">+</button>' +
+              '</div>' +
+            '</div>' +
+            '<div class="product-actions">' +
+              '<button type="button" class="btn btn-cart" id="add-to-cart">Add to cart</button>' +
+              '<a class="btn btn-outline" href="' + orderLink + '">Order now on WhatsApp</a>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+
+      // Quantity buttons and "Add to cart"
+      let quantity = 1;
+      const quantityText = document.getElementById("qty-value");
+
+      document.getElementById("qty-minus").addEventListener("click", function () {
+        quantity = Math.max(1, quantity - 1);
+        quantityText.textContent = quantity;
+      });
+
+      document.getElementById("qty-plus").addEventListener("click", function () {
+        quantity = Math.min(20, quantity + 1);
+        quantityText.textContent = quantity;
+      });
+
+      document.getElementById("add-to-cart").addEventListener("click", function () {
+        Cart.add(p.id, quantity);
+        Cart.toast("Added " + quantity + " x " + p.name);
+      });
+
+      // If an image file is missing, show the emoji instead
+      document.querySelectorAll(".gallery img").forEach(function (img) {
+        img.addEventListener("error", function () {
+          if (img.id === "main-img") {
+            document.getElementById("main-photo").textContent = p.emoji;
+          } else {
+            img.parentElement.style.display = "none"; // hide broken thumbnail
+          }
+        });
+      });
+
+      // Clicking a thumbnail changes the big picture
+      document.querySelectorAll(".thumb").forEach(function (button) {
+        button.addEventListener("click", function () {
+          let mainImg = document.getElementById("main-img");
+          if (!mainImg) { // it was replaced by the emoji, so rebuild it
+            document.getElementById("main-photo").innerHTML = '<img id="main-img" alt="' + p.name + '">';
+            mainImg = document.getElementById("main-img");
+          }
+          mainImg.src = button.dataset.src;
+        });
+      });
+    }
+  </script>
+
+</body>
+</html>
